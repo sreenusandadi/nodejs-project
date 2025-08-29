@@ -1,0 +1,66 @@
+@import "./main.css";
+
+.mainContainer{
+    padding: 10px;
+}
+
+.productList{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.productContainer{
+    width: 350px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid var(--primary);
+}
+
+.proDetailsContainer{
+    text-align: center;
+}
+
+.proDetailsContainer div{
+    margin-bottom: 10px;
+}
+
+.btn-section{
+    display: flex;
+    gap: 5px;
+}
+
+.btn-section button,
+.btn-section a{
+    background-color: var(--primary);
+    color: var(--secondary);
+    padding: 5px 7px;
+    border: 1px solid var(--primary);
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.btn-section a{
+    text-decoration: none;
+}
+
+.btn-section button:hover,
+.btn-section a:hover {
+    background-color: transparent;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    cursor: pointer;
+}
+
+.btn-section .btn-delete{
+    background-color: #d31515;
+}
+
+.pageTitle{
+    font-size: large;
+    font-weight: bold;
+}

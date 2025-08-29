@@ -1,0 +1,32 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/product.css" />
+  </head>
+  <body>
+    <%- include('../includes/navigation.ejs') %>
+
+    <main class="mainContainer">
+      <h1>Product List</h1>
+      
+      <% if(products.length > 0) { %>
+      <div class="productList">
+        <% for(let product of products){ %>
+        <div class="productContainer">
+          <div class="pageTitle"><%= product.title %></div>
+          <div><img src="<%= product.imageUrl %>" alt="<%= product.title %>" height="200" /></div>
+          <div>$ <%= product.price %></div>
+          <div><%= product.description %></div>
+          <div class="btn-section">
+            <a href="/admin/products/<%=product._id %>?edit=true">Edit</a>
+            <form action="/admin/delete-product" method="post">
+              <input hidden type="text" name="productId" value="<%= product._id %>" />
+              <button class="btn-delete" type="submit">Delete</button>
+            </form>
+          </div>
+        </div>
+        <% } %>
+      </div>
+      <% } else { %>
+      <p>No Products Found!</p>
+      <% } %>
+    </main>
+    <%- include('../includes/end.ejs') %>

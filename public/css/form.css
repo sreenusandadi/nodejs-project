@@ -1,0 +1,36 @@
+@import "./main.css";
+
+form {
+  width: 230px;
+  margin: 10px auto;
+}
+
+.form-control {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 5px;
+}
+
+.form-control label {
+  font-weight: bold;
+}
+.form-control input {
+  padding: 5px;
+  border: 1px solid var(--primary);
+  border-radius: 2px;
+}
+
+button {
+  background-color: var(--primary);
+  border: 1px solid var(--primary);
+  color: var(--secondary);
+  border-radius: 3px;
+  padding: 5px 3px;
+}
+
+button:hover,
+button:active {
+  background-color: transparent;
+  color: var(--primary);
+}

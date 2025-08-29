@@ -1,0 +1,18 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/form.css" />
+  </head>
+  <body>
+    <%- include('../includes/navigation.ejs') %>
+    <form action="/admin/<%if(isEdit){%>edit-user<%} else {%>add-user<%}%>" method="POST">
+      <div class="form-control">
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username" value="<%if(isEdit){%><%= user.username%><%}%>"/>
+      </div>
+      <div class="form-control">
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" value="<%if(isEdit){%><%= user.email %><%}%>" />
+      </div>
+      <input hidden type="text" name="userId" value="<%if(isEdit){%><%= user._id %><%}%>" />
+      <button type="submit"><%if(isEdit){%>Update User<%} else {%>Add User<%}%></button>
+    </form>
+<%- include('../includes/end.ejs') %>

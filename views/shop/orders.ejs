@@ -1,0 +1,22 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/order.css" />
+  </head>
+  <body>
+   <%- include('../includes/navigation.ejs') %>
+
+    <div class="orders-container">
+        <%if(orders.length > 0){%>
+                <%orders.forEach(order=>{%>
+                    <div class="orders-list">
+                        <span>Order - # <%= order._id %></span>                        
+                        <%order.products.forEach(item=>{%>
+                            <div class="order-list-item"><%= item.product.title%> (<%= item.quantity%>)</div>
+                        <%})%>
+                    </div>
+                <%})%>  
+        <%}else{%>
+                <h1>No orders available</h1>
+            <%}%>
+    </div>
+  
+<%- include('../includes/end.ejs') %>

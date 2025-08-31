@@ -1,0 +1,23 @@
+.orders-container {
+  margin: 20px;
+}
+
+.orders-list {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.order-list-item {
+  border: 1px solid var(--primary);
+  padding: 5px;
+  border-radius: 3px;
+  margin-bottom: 5px;
+  color: var(--primary);
+}
+
+.orders-list span {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 10px;
+}

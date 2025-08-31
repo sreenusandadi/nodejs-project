@@ -6,21 +6,23 @@
    <%- include('../includes/navigation.ejs') %>
 
    <main class="cart-main_container">
-     <% if(cartProducts.length > 0){%> 
+     <% if(cartProducts?.length > 0){%> 
       <div class="cart-container">
         <% cartProducts.forEach(product => { %>
           <div class="cart-box">
-            <div><%= product.title %></div>
-            <div>Quantity: <%= product.qty %></div>
+            <div><%= product.productId.title %></div>
+            <div>Quantity: <%= product.quantity %></div>
             <form action="/cart-item-delete" method="post">
-              <input hidden type="text" name="productId" value="<%= product._id %>" />
+              <input hidden type="text" name="productId" value="<%= product.productId._id %>" />
               <button class="btn-delete" type="submit">Delete</button>
             </form>
           </div>
           <%})%>
       </div>
       <hr />
-      <button class="order-now">Order Now</button>
+      <form action="/orders" method="post">
+        <button class="order-now">Order Now</button>
+      </form>
       <%} else {%> <h1>No items in cart!</h1><%}%>
    </main>
   

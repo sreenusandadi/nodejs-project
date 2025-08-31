@@ -9,7 +9,7 @@ const users = [];
 
 router.get("/add-product", adminController.getAddProduct);
 
-router.get("/add-user", adminController.getAddUser);
+// router.get("/add-user", adminController.getAddUser);
 
 router.get("/products", adminController.getAdminProducts);
 
@@ -17,7 +17,7 @@ router.get("/products/:productId", adminController.getEditProduct);
 
 router.post("/add-product", adminController.postProduct);
 
-router.post("/add-user", adminController.postUser);
+// router.post("/add-user", adminController.postUser);
 
 router.post("/edit-product", adminController.postEditProduct);
 

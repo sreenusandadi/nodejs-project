@@ -9,6 +9,7 @@ exports.getIndex = (req, res) => {
         path: "/",
         pageTitle: "Product Details",
         hasProducts: products?.length > 0,
+        isAuthenticated: req.session.expiredIn,
       });
     })
     .catch((err) => console.log(err));
@@ -22,6 +23,7 @@ exports.getProducts = (req, res) => {
         path: "/products",
         pageTitle: "Product Details",
         hasProducts: products?.length > 0,
+        isAuthenticated: req.session.expiredIn,
       });
     })
     .catch((err) => console.log(err));
@@ -35,6 +37,7 @@ exports.getProduct = (req, res) => {
         pageTitle: prodId,
         product: product,
         path: "/products",
+        isAuthenticated: req.session.expiredIn,
       });
     })
     .catch((err) => console.log(err));
@@ -49,6 +52,7 @@ exports.getCart = (req, res, next) => {
         path: "/cart",
         pageTitle: "Cart",
         cartProducts: products,
+        isAuthenticated: req.session.expiredIn,
       });
     })
     .catch((err) => console.log(err));
@@ -61,6 +65,7 @@ exports.getOrders = (req, res) => {
         pageTitle: "Orders",
         path: "/orders",
         orders: orders,
+        isAuthenticated: req.session.expiredIn,
       });
     })
     .catch((err) => console.log(err));
@@ -111,5 +116,5 @@ exports.postDeleteCart = (req, res) => {
 };
 
 exports.getCheckout = (req, res, next) => {
-  res.render("shop/checkout", { pageTitle: "Checkout", path: "/checkout" });
+  res.render("shop/checkout", { pageTitle: "Checkout", path: "/checkout", isAuthenticated: req.session.expiredIn, });
 };

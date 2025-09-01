@@ -9,11 +9,11 @@
 }
 
 .order-list-item {
-  border: 1px solid var(--primary);
+  border: 1px solid var(--bg-primary);
   padding: 5px;
   border-radius: 3px;
   margin-bottom: 5px;
-  color: var(--primary);
+  color: var(--bg-primary);
 }
 
 .orders-list span {

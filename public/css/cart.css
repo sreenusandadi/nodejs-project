@@ -36,11 +36,11 @@
 }
 
 .cart-main_container .order-now{
-    border-color: var(--primary);
-    color: var(--primary);
+    border-color: var(--bg-primary);
+    color: var(--bg-primary);
 }
 
 .cart-main_container .order-now:hover{
-    background-color: var(--primary);
+    background-color: var(--bg-primary);
     color: var(--secondary);
 }

@@ -1,8 +1,7 @@
-@import "./main.css";
-
-form {
+.product-form {
   width: 230px;
-  margin: 10px auto;
+  display: block;
+  margin: 20px auto;
 }
 
 .form-control {
@@ -17,13 +16,13 @@ form {
 }
 .form-control input {
   padding: 5px;
-  border: 1px solid var(--primary);
+  border: 1px solid var(--bg-primary);
   border-radius: 2px;
 }
 
 button {
-  background-color: var(--primary);
-  border: 1px solid var(--primary);
+  background-color: var(--bg-primary);
+  border: 1px solid var(--bg-primary);
   color: var(--secondary);
   border-radius: 3px;
   padding: 5px 3px;
@@ -32,5 +31,5 @@ button {
 button:hover,
 button:active {
   background-color: transparent;
-  color: var(--primary);
+  color: var(--bg-primary);
 }

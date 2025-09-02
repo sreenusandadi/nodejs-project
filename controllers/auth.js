@@ -119,7 +119,7 @@ exports.postReset = (req, res, next) => {
           return res.redirect("/reset");
         }
         user.resetToken = token;
-        user.resetTokenExpiration = new Date().getTime() + 3600000;
+        user.resetTokenExpiration = Date.now() + 3600000;
         return user.save();
       })
       .then((result) => {
@@ -147,19 +147,49 @@ exports.postReset = (req, res, next) => {
 
 exports.getNewPassword = (req, res, next) => {
   const token = req.params.token;
-  User.findOne({ resetToken: token, resetTokenExpiration: { $gt: new Date().getTime() } })
+  User.findOne({ resetToken: token, resetTokenExpiration: { $gt: Date.now() } })
     .then((user) => {
-      console.log('user==================',user);
       if (!user) {
         req.flash("error", "Token is expired!");
-        return res.redirect("/new-password");
+        return res.redirect("/reset");
       }
       res.render("auth/new-password", {
         path: "/new-password",
         pageTitle: "New Password",
         errorMessage: req.flash("error"),
         userId: user._id.toString(),
+        resetToken: user.resetToken,
       });
+    })
+    .catch((err) => console.log(err));
+};
+
+exports.postNewPassword = (req, res, next) => {
+  const password = req.body.password;
+  const userId = req.body.userId;
+  const resetToken = req.body.resetToken;
+  let resetUser;
+  User.findOne({
+    resetToken: resetToken,
+    resetTokenExpiration: { $gt: Date.now() },
+    _id: userId,
+  })
+    .then((user) => {
+      if (!user) {
+        req.flash("error", "Token is expired!");
+        return res.redirect("/reset");
+      }
+      resetUser = user;
+      return bcrypt.hash(password, 12);
+    })
+    .then((hashedPassword) => {
+      resetUser.password = hashedPassword;
+      resetUser.resetToken = undefined;
+      resetUser.resetTokenExpiration = undefined;
+      return resetUser.save();
+    })
+    .then((result) => {
+      res.redirect("/login");
     })
     .catch((err) => console.log(err));
 };

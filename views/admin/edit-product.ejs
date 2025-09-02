@@ -6,21 +6,33 @@
     <form class="main-form" action="/admin/<%if(isEdit){%>edit-product<%} else {%>add-product<%}%>" method="POST">
       <div class="form-control">
         <label for="title">Title:</label>
-        <input type="text" name="title" id="title" value="<%if(isEdit){%><%= product.title%><%}%>"/>
+        <input type="text" name="title" id="title" value="<%if(isEdit || isError){%><%= product.title%><%}%>"/>
+        <%if(errorObj.title){%>
+          <div class="danger"><%= errorObj.title %></div>
+        <%}%>
       </div>
       <div class="form-control">
         <label for="imageUrl">Image Url:</label>
-        <input type="text" name="imageUrl" id="imageUrl" value="<%if(isEdit){%><%= product.imageUrl %><%}%>" />
+        <input type="text" name="imageUrl" id="imageUrl" value="<%if(isEdit || isError){%><%= product.imageUrl %><%}%>" />
+        <%if(errorObj.imageUrl){%>
+          <div class="danger"><%= errorObj.imageUrl %></div>
+        <%}%>
       </div>
       <div class="form-control">
         <label for="price">Price:</label>
-        <input type="number" name="price" id="price" step="0.01" value="<%if(isEdit){%><%= product.price%><%}%>"/>
+        <input type="number" name="price" id="price" step="0.01" value="<%if(isEdit || isError){%><%= product.price%><%}%>"/>
+        <%if(errorObj.price){%>
+          <div class="danger"><%= errorObj.price %></div>
+        <%}%>
       </div>
       <div class="form-control">
         <label for="description">Description:</label>
-        <textarea name="description" id="description" cols="5"><%if(isEdit){%><%= product.description%><%}%></textarea>
+        <textarea name="description" id="description" cols="5"><%if(isEdit || isError){%><%= product.description%><%}%></textarea>
+        <%if(errorObj.description){%>
+          <div class="danger"><%= errorObj.description %></div>
+        <%}%>
       </div>
-      <input hidden type="text" name="productId" value="<%if(isEdit){%><%= product._id %><%}%>" />
+      <input hidden type="text" name="productId" value="<%if(isEdit || isError){%><%= product._id %><%}%>" />
       <input hidden name="_csrf" value="<%= csrfToken %>" />
       <button type="submit"><%if(isEdit){%>Update Product<%} else {%>Add Product<%}%></button>
     </form>

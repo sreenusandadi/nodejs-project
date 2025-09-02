@@ -3,21 +3,31 @@
 </head>
   <body>
     <%- include('../includes/navigation.ejs') %>
-    <%if(errorMessage && errorMessage.length > 0){%>
+    <!-- <%if(errorMessage && errorMessage.length > 0){%>
       <div class="user-message user-message--error"><%= errorMessage %></div>
-    <%}%>
-    <form class="main-form" action="/signup" method="post">
+    <%}%> -->
+    <form class="main-form" action="/signup" method="post" novalidate>
       <div class="form-control">
         <label for="email">Email:</label>
-        <input type="email" name="email" id="email"/>
+        <input type="email" name="email" id="email" value="<%= oldInput.email%>" />
+        <%if(isError.email && isError.email.msg){%>
+          <div class="danger"><%= isError.email.msg %></div>
+        <%}%>
       </div>
+      
       <div class="form-control">
         <label for="password">Password:</label>
-        <input type="password" name="password" id="password" />
+        <input type="password" name="password" id="password" value="<%= oldInput.password%>" />
+        <%if(isError.password && isError.password.msg){%>
+          <div class="danger"><%= isError.password.msg %></div>
+        <%}%>
       </div>
       <div class="form-control">
         <label for="confirmPassword">Confirm Password:</label>
-        <input type="password" name="confirmPassword" id="confirmPassword" />
+        <input type="password" name="confirmPassword" id="confirmPassword" value="<%= oldInput.confirmPassword%>" />
+        <%if(isError.confirmPassword && isError.confirmPassword.msg){%>
+          <div class="danger"><%= isError.confirmPassword.msg %></div>
+        <%}%>
       </div>
       <input hidden name="_csrf" value="<%= csrfToken %>" />
       <button type="submit">Sign Up</button>

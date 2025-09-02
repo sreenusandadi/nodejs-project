@@ -20,6 +20,10 @@
   border-radius: 2px;
 }
 
+.form-control input.invalid {
+  border-color: #ff0000;
+}
+
 button {
   background-color: var(--bg-primary);
   border: 1px solid var(--bg-primary);

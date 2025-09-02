@@ -1,3 +1,5 @@
+const { validationResult } = require("express-validator");
+
 const Product = require("../models/product");
 const User = require("../models/user");
 
@@ -6,6 +8,19 @@ exports.getAddProduct = (req, res) => {
     path: "/admin/add-product",
     pageTitle: "Add Product",
     isEdit: false,
+    isError: false,
+    errorObj: {
+      title: "",
+      imageUrl: "",
+      price: "",
+      description: "",
+    },
+    product: {
+      title: "",
+      imageUrl: "",
+      price: "",
+      description: "",
+    },
   });
 };
 
@@ -30,6 +45,13 @@ exports.getEditProduct = (req, res) => {
         pageTitle: "Edit Product",
         isEdit: editMode,
         product: product,
+        isError: false,
+        errorObj: {
+          title: "",
+          imageUrl: "",
+          price: "",
+          description: "",
+        },
       });
     })
     .catch((err) => console.log(err));
@@ -40,6 +62,41 @@ exports.postProduct = (req, res) => {
   const imageUrl = req.body.imageUrl;
   const price = req.body.price;
   const description = req.body.description;
+
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const titleErrorMsg = errors
+      .array()
+      .find((err) => err.path === "title")?.msg;
+    const imgUrlErrorMsg = errors
+      .array()
+      .find((err) => err.path === "imageUrl")?.msg;
+    const priceErrorMsg = errors
+      .array()
+      .find((err) => err.path === "price")?.msg;
+    const descErrorMsg = errors
+      .array()
+      .find((err) => err.path === "description")?.msg;
+    console.log(errors.array());
+    return res.status(422).render("admin/edit-product", {
+      path: "/admin/add-product",
+      pageTitle: "Add Product",
+      isEdit: false,
+      isError: true,
+      errorObj: {
+        title: titleErrorMsg,
+        imageUrl: imgUrlErrorMsg,
+        price: priceErrorMsg,
+        description: descErrorMsg,
+      },
+      product: {
+        title: title,
+        imageUrl: imageUrl,
+        price: price,
+        description: description,
+      },
+    });
+  }
   const product = new Product({
     title: title,
     imageUrl: imageUrl,
@@ -64,6 +121,42 @@ exports.postEditProduct = (req, res) => {
   const price = req.body.price;
   const description = req.body.description;
   const prodId = req.body.productId;
+
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const titleErrorMsg = errors
+      .array()
+      .find((err) => err.path === "title")?.msg;
+    const imgUrlErrorMsg = errors
+      .array()
+      .find((err) => err.path === "imageUrl")?.msg;
+    const priceErrorMsg = errors
+      .array()
+      .find((err) => err.path === "price")?.msg;
+    const descErrorMsg = errors
+      .array()
+      .find((err) => err.path === "description")?.msg;
+    console.log(errors.array());
+    return res.status(422).render("admin/edit-product", {
+      path: "/admin/add-product",
+      pageTitle: "Add Product",
+      isEdit: false,
+      isError: true,
+      errorObj: {
+        title: titleErrorMsg,
+        imageUrl: imgUrlErrorMsg,
+        price: priceErrorMsg,
+        description: descErrorMsg,
+      },
+      product: {
+        title: title,
+        imageUrl: imageUrl,
+        price: price,
+        description: description,
+        _id: prodId
+      },
+    });
+  }
   Product.findById(prodId)
     .then((product) => {
       if (product.userId.toString() !== req.user._id.toString()) {
@@ -81,7 +174,7 @@ exports.postEditProduct = (req, res) => {
 };
 
 exports.getAdminProducts = (req, res, next) => {
-  Product.find({userId: req.user._id})
+  Product.find({ userId: req.user._id })
     .then((products) => {
       res.render("admin/products", {
         products: products,
@@ -95,7 +188,7 @@ exports.getAdminProducts = (req, res, next) => {
 
 exports.postDeleteProduct = (req, res) => {
   const prodId = req.body.productId;
-  Product.deleteOne({_id: prodId, userId: req.user._id}).then(() => {
+  Product.deleteOne({ _id: prodId, userId: req.user._id }).then(() => {
     res.redirect("/admin/products");
   });
 };

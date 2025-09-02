@@ -185,6 +185,11 @@ form {
   background-color: #c05c5c;
 }
 
+.danger{
+  color: #ff0000;
+  font-size: small;
+}
+
 @media (min-width: 768px) {
   .main-header__nav {
     display: flex;

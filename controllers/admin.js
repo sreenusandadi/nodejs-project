@@ -6,7 +6,6 @@ exports.getAddProduct = (req, res) => {
     path: "/admin/add-product",
     pageTitle: "Add Product",
     isEdit: false,
-    isAuthenticated: req.session.expiredIn,
   });
 };
 
@@ -15,7 +14,6 @@ exports.getAddUser = (req, res) => {
     pageTitle: "Add User",
     path: "/admin/add-user",
     isEdit: false,
-    isAuthenticated: req.session.expiredIn,
   });
 };
 
@@ -32,7 +30,6 @@ exports.getEditProduct = (req, res) => {
         pageTitle: "Edit Product",
         isEdit: editMode,
         product: product,
-        isAuthenticated: req.session.expiredIn,
       });
     })
     .catch((err) => console.log(err));
@@ -89,7 +86,6 @@ exports.getAdminProducts = (req, res, next) => {
         path: "/admin/products",
         pageTitle: "Products",
         hasProducts: products?.length > 0,
-        isAuthenticated: req.session.expiredIn,
       });
     })
     .catch((err) => console.log(err));

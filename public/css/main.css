@@ -169,6 +169,22 @@ form {
   display: none;
 }
 
+.user-message{
+  width: 90%;
+  margin: 10px auto;
+  border: 1px solid var(--bg-primary);
+  border-radius: 10px;
+  background-color: #8cc5be;
+  padding: 5px 10px;
+  text-align: center;
+  color: var(--secondary);
+}
+
+.user-message--error{
+  border-color: #ff0000;
+  background-color: #c05c5c;
+}
+
 @media (min-width: 768px) {
   .main-header__nav {
     display: flex;
@@ -176,5 +192,19 @@ form {
 
   #side-menu-toggle {
     display: none;
+  }
+
+  .user-message{
+    width: 30rem;
+  }
+
+  .flex-space-between{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .flex-space-between a{
+    color: var(--bg-primary);
   }
 }
